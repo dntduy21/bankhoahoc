@@ -25,8 +25,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/QuanLyKhoaHoc")
-//@CrossOrigin(origins = "*")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class CourseController {
     @Value("${upload.path}")
     private String uploadPath;
@@ -210,7 +209,7 @@ public class CourseController {
         // Lấy danh sách khóa học đã đăng ký
         List<UserCourse> existingEnrollments = userCourseRepository.findByUser_UserIdAndCourse_CourseIdIn(student.getUserId(), listCoursesId);
         List<String> existingCourseIds = existingEnrollments.stream()
-                .map(enrollment -> enrollment.getId().getCourseId()) // ✅ Dùng getId().getCourseId()
+                .map(enrollment -> enrollment.getId().getCourseId()) // Dùng getId().getCourseId()
                 .collect(Collectors.toList());
 
 
@@ -231,7 +230,7 @@ public class CourseController {
             userCourseId.setUserId(student.getUserId());
             userCourseId.setCourseId(courseId);
 
-            enrollment.setId(userCourseId); // ✅ Gán ID vào enrollment
+            enrollment.setId(userCourseId); // Gán ID vào enrollment
             enrollment.setRegistrationDate(LocalDate.now());
 
             return enrollment;
