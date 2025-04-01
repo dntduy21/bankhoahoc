@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.DTO.UserUpdate;
+import com.example.demo.DTO.UserUpdateRequest;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.model.UserCourse;
@@ -124,16 +126,9 @@ public class UserController {
     }
 
     @PutMapping("/CapNhatThongTinNguoiDung")
-    public ResponseEntity<?> updateUser(@RequestBody Map<String, String> body) {
+    public ResponseEntity<?> updateUser(@RequestBody UserUpdate request) {
         try {
-            String username = body.get("username");
-            String fullName = body.get("fullName");
-            String password = body.get("password");
-            String email = body.get("email");
-            String phone = body.get("phone");
-            String newRoleId = body.get("roleId");
-
-            Optional<User> userOpt = userRepository.findByUsername(username);
+            Optional<User> userOpt = userRepository.findByUsername(request.getUsername());
             if (userOpt.isEmpty()) {
                 return ResponseEntity.status(404).body("Tài khoản không tồn tại!");
             }
@@ -142,29 +137,29 @@ public class UserController {
             String oldRoleId = user.getRole().getRoleId();
 
             // Kiểm tra nếu email, số điện thoại bị trùng
-            if (!user.getEmail().equals(email) && userRepository.findByEmail(email).isPresent()) {
+            if (!user.getEmail().equals(request.getEmail()) && userRepository.findByEmail(request.getEmail()).isPresent()) {
                 return ResponseEntity.status(400).body("Email đã tồn tại");
             }
-            if (!user.getPhone().equals(phone) && userRepository.findByPhone(phone).isPresent()) {
+            if (!user.getPhone().equals(request.getPhone()) && userRepository.findByPhone(request.getPhone()).isPresent()) {
                 return ResponseEntity.status(400).body("Số điện thoại đã tồn tại");
             }
 
             // Cập nhật thông tin
-            user.setFullName(fullName);
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setPhone(phone);
+            user.setFullName(request.getFullName());
+            user.setPassword(request.getPassword());
+            user.setEmail(request.getEmail());
+            user.setPhone(request.getPhone());
 
             // Nếu vai trò thay đổi, cập nhật mã người dùng
-            if (!oldRoleId.equals(newRoleId)) {
-                Optional<Role> roleOpt = roleRepository.findById(newRoleId);
+            if (!oldRoleId.equals(request.getRoleId())) {
+                Optional<Role> roleOpt = roleRepository.findById(request.getRoleId());
                 if (roleOpt.isEmpty()) {
                     return ResponseEntity.status(400).body("Vai trò không hợp lệ");
                 }
                 user.setRole(roleOpt.get());
 
                 // Tạo mã người dùng mới theo vai trò mới
-                String newUserId = newRoleId + System.currentTimeMillis();
+                String newUserId = request.getRoleId() + System.currentTimeMillis();
                 user.setUserId(newUserId);
             }
 
@@ -174,7 +169,6 @@ public class UserController {
             return ResponseEntity.status(400).body("Không thể cập nhật người dùng: " + e.getMessage());
         }
     }
-
 
     // Lấy thông tin người dùng
     @GetMapping("/get/{username}")
