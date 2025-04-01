@@ -326,15 +326,13 @@ public class CourseController {
         }
     }
 
-    // ---------------- 4. Cập nhật khóa học ----------------
     @PutMapping("/CapNhatKhoaHoc")
     public ResponseEntity<?> updateCourse(
             @RequestParam String courseId,
             @RequestParam String courseName,
             @RequestParam String description,
             @RequestParam Long price,
-            @RequestParam(value = "Artificial Intelligence", required = false, defaultValue = "default") String courseType,
-            @RequestParam(name = "file", required = false) MultipartFile file // file ảnh mới (optional)
+            @RequestParam(name = "file", required = false) MultipartFile file
     ) {
         try {
             // Tìm khóa học
@@ -344,17 +342,9 @@ public class CourseController {
             }
             Course course = courseOpt.get();
 
-            // Kiểm tra danh mục
-//            Optional<CourseCategory> catOpt = categoryRepository.findByCategoryName(courseType);
-//            if (catOpt.isEmpty()) {
-//                return ResponseEntity.badRequest().body("Danh mục khóa học không tồn tại");
-//            }
-//            CourseCategory categoryExist = catOpt.get();
-
             // Nếu có ảnh cũ, xóa
             if (course.getImage() != null && !course.getImage().isEmpty() && file != null && !file.isEmpty()) {
                 String oldFilePath = uploadPath + course.getImage();
-                FileUploadUtil.deleteUploadedFile(oldFilePath);
                 FileUploadUtil.deleteUploadedFile(oldFilePath);
             }
 
@@ -372,7 +362,6 @@ public class CourseController {
             course.setCourseName(courseName);
             course.setDescription(description);
             course.setPrice(price);
-//            course.setCategory(categoryExist);
             course.setImage(newImageName);
             course.setUpdateDate(LocalDate.now());
 
