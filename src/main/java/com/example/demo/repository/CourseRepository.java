@@ -13,10 +13,8 @@ public interface CourseRepository extends JpaRepository<Course, String> {
 
     List<Course> findByCreator_UserId(String userId);
 
-    @Query("SELECT c FROM Course c WHERE LOWER(c.courseName) LIKE LOWER(CONCAT('%', :courseName, '%'))")
-    List<Course> findByCourseNameContainingIgnoreCase(@Param("courseName") String courseName);
+    List<Course> findByCourseNameContainingIgnoreCase(String courseName);
 
-//    List<Course> findByCreator_UserId(String userId);
-Optional<Course> findTopByCategory_CategoryIdOrderByCourseIdDesc(String categoryId);
+    Optional<Course> findTopByCategory_CategoryIdOrderByCourseIdDesc(String categoryId);
 
 }
