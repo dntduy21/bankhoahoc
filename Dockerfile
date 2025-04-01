@@ -19,4 +19,4 @@ VOLUME ["/app/uploads"]
 EXPOSE 8080
 
 # Đảm bảo thư mục uploads luôn tồn tại khi container chạy
-ENTRYPOINT ["sh", "-c", "mkdir -p /app/uploads && chmod -R 777 /app/uploads && java -jar app.jar"]
+ ENTRYPOINT ["sh", "-c", "mkdir -p /app/uploads && chmod -R 777 /app/uploads && java -jar app.jar"]
