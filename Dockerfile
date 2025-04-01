@@ -11,12 +11,12 @@ WORKDIR /app
 # Copy jar từ stage build vào container, đặt tên là app.jar
 COPY --from=build /app/target/*.jar app.jar
 
-# Tạo thư mục upload tạm thời
-RUN mkdir -p /app/uploads
+# Tạo thư mục uploads
+RUN mkdir -p /app/uploads && chmod -R 777 /app/uploads
 VOLUME ["/app/uploads"]
 
 # Expose port để Render hiểu app chạy cổng nào
 EXPOSE 8080
 
-# Chạy app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Đảm bảo thư mục uploads luôn tồn tại khi container chạy
+ENTRYPOINT ["sh", "-c", "mkdir -p /app/uploads && chmod -R 777 /app/uploads && java -jar app.jar"]
