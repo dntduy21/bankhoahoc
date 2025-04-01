@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.User;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
@@ -21,6 +20,4 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByPhone(String phone);
 
     Optional<User> findTopByRole_RoleIdOrderByUserIdDesc(String roleId);
-//    @EntityGraph(attributePaths = {"coursesPurchased.course"})
-//    Optional<User> findById(String userId);
 }

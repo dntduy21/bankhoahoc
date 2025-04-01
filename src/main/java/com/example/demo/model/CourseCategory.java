@@ -1,8 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class CourseCategory {
     @Id
     @Column(nullable = false, length = 50)
@@ -10,22 +14,4 @@ public class CourseCategory {
 
     @Column(length = 100)
     private String categoryName;
-
-    // Getter và Setter
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
 }

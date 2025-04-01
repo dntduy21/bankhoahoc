@@ -29,7 +29,7 @@ public class CategoryController {
 
     @PostMapping("/ThemDanhMuc")
     public ResponseEntity<?> addCategory(@RequestBody CourseCategory category) {
-        if (category.getCategoryId() == null || category.getCategoryName() == null) {
+        if (category.getCategoryId() == null || category.getCategoryId().isEmpty() || category.getCategoryName() == null || category.getCategoryName().isEmpty()) {
             return ResponseEntity.badRequest().body("categoryId và categoryName không được để trống");
         }
         if (categoryRepository.existsById(category.getCategoryId())) {

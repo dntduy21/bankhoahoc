@@ -1,10 +1,14 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 public class UserCourse {
     @EmbeddedId
     private UserCourseId id;
@@ -29,38 +33,4 @@ public class UserCourse {
 
     @Column
     private LocalDate registrationDate;
-
-    // Getter và Setter
-
-    public UserCourseId getId() {
-        return id;
-    }
-
-    public void setId(UserCourseId id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 }

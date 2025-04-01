@@ -2,33 +2,18 @@ package com.example.demo.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 @Data
+@Getter
+@Setter
 @Embeddable
 public class UserCourseId implements Serializable {
     private String userId;
     private String courseId;
-
-    // Getter và Setter
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
-    // Nên override equals và hashCode cho composite key
 
     @Override
     public boolean equals(Object o) {

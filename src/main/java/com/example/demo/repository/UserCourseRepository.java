@@ -1,6 +1,5 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.User;
 import com.example.demo.model.UserCourse;
 import com.example.demo.model.UserCourseId;
 import org.springframework.data.jpa.repository.JpaRepository;

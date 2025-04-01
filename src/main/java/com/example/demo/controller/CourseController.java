@@ -298,7 +298,6 @@ public class CourseController {
                     System.out.println("Created directory: " + uploadPath);
                 }
 
-//                String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
                 String filePath = Paths.get(uploadPath, fileName).toString();
                 System.out.println("Saving file to: " + filePath);
                 file.transferTo(new File(filePath));
@@ -375,7 +374,7 @@ public class CourseController {
         }
     }
 
-    // ---------------- 1. Xóa khóa học ----------------
+    // Xóa khóa học
     @DeleteMapping("/XoaKhoaHoc/{courseId}")
     public ResponseEntity<?> deleteCourse(@PathVariable String courseId) {
         // Tìm khóa học

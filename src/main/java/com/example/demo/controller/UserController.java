@@ -57,7 +57,9 @@ public class UserController {
             String roleId = body.getOrDefault("roleId", "HV");
 
             // Kiểm tra các giá trị bắt buộc
-            if (username == null || password == null || fullName == null || email == null || phone == null) {
+            if (username == null || username.isEmpty() || password == null || password.isEmpty()
+                    || fullName == null || fullName.isEmpty() || email == null
+                    || email.isEmpty() || phone == null || phone.isEmpty()) {
                 return ResponseEntity.status(400).body("Vui lòng điền đầy đủ thông tin");
             }
 

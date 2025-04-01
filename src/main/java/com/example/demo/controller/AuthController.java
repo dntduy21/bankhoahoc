@@ -8,7 +8,6 @@ import com.example.demo.model.Course;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.model.UserCourse;
-import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserCourseRepository;
 import com.example.demo.repository.UserRepository;
@@ -48,7 +47,7 @@ public class AuthController {
                 return ResponseEntity.badRequest().body("Tài khoản đã tồn tại!");
             }
 
-            // Tạo userId mới (giả sử logic đơn giản)
+            // Tạo userId mới
             String newUserId = "HV" + System.currentTimeMillis(); // HV + timestamp
             Role role = roleRepository.findById("HV").get();
             // Tạo user entity
