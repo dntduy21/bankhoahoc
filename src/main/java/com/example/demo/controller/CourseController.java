@@ -423,15 +423,5 @@ public class CourseController {
 
         return ResponseEntity.ok("Xóa khóa học thành công!");
     }
-
-    @DeleteMapping("/XoaFile")
-    public ResponseEntity<?> deleteUploadedFile(@RequestParam String filePath) {
-        try {
-            FileUploadUtil.deleteUploadedFile(filePath);
-            return ResponseEntity.ok("Xóa file thành công!");
-        } catch (IOException e) {
-            return ResponseEntity.badRequest().body("Error deleting file: " + e.getMessage());
-        }
-    }
 }
 
